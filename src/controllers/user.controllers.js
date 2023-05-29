@@ -2,7 +2,6 @@ const catchError = require("../utils/catchError");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const sendEmail = require("../utils/sendEmail");
-const { link } = require("fs");
 const EmailCode = require("../models/UserCode");
 const jwt = require("jsonwebtoken");
 
@@ -26,7 +25,7 @@ const create = catchError(async (req, res) => {
   const code = require("crypto").randomBytes(32).toString("hex");
   const link = `${frontBaseUrl}/verify_email/${code}`;
   await sendEmail({
-    to: "sammyrosa2892@gmail.com",
+    to: email,
     subject: "Verificate email for user app",
     html: `
         <h1>Hello ${firstName} ${lastName}</h1>
